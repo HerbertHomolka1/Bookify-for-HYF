@@ -24,30 +24,21 @@ function App() {
  
 
   let data = useBooks();
-  let cards;
+  
+  // const [cards, setCards] = useState([]);
+ 
  
      
+      // let mycards;
+    if (readOrOnRadar === 'on-radar') {
+       
+      data = onRadar;
+       
      
-      if (readOrOnRadar === 'read') {
-        
-        console.log('')
-        
-      } else if (readOrOnRadar === 'on-radar') {
-        cards =  Object.values(onRadar).map((book) => <BookCard book = {book} onRadar={onRadar} setOnRadar={setOnRadar}/>)
-        console.log(onRadar)
-        console.log(data)
-      
-        // setData(onRadar)
-      } else if (readOrOnRadar === 'discover') {
-        cards  = Object.values(data).map((book) => <BookCard book = {book} onRadar={onRadar} setOnRadar={setOnRadar}/>)
-      }
-  
+      } 
 
-
-
-
- 
-  
+      let cards;
+      cards = Object.values(data).map((book) => <BookCard book = {book} onRadar={onRadar} setOnRadar={setOnRadar}/>)
   return (
   <>
         <Navbar
@@ -64,7 +55,7 @@ function App() {
         <Navbar.Collapse id="navbarScroll">
           <Nav
             className="me-auto my-2 my-lg-0"
-            style={{ maxHeight: "100px" }}
+            style={ { maxHeight: "100px" }}
             navbarScroll
           >
             <Dropdown>

@@ -10,6 +10,10 @@ function BookCard({book, onRadar, setOnRadar}) {
     const baseStyle={width: '100%', textAlign: 'center',backgroundColor:'rgb(255,255,78)', opacity:'1'};
     const hoverStyle={...baseStyle, opacity:'0.4'}
 
+
+
+
+
     
 
   return (
@@ -22,7 +26,7 @@ function BookCard({book, onRadar, setOnRadar}) {
 
         </Card.Text>
       </Card.Body>
-      <div onClick={() => setOnRadar(onRadar.add(book))  }>
+      <div onClick={()=> {setOnRadar(onRadar.add(book)),console.log(onRadar)  }}>
       <Card.Footer style={mouseHover ? hoverStyle : baseStyle}  onMouseEnter={() => setMouseHover(true)} onMouseLeave={() => setMouseHover(false)}>
         Put it on your radar
         </Card.Footer>
