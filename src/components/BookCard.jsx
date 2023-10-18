@@ -3,12 +3,14 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Form from "react-bootstrap/Form";
 import { useEffect, useState } from "react";
 
-function BookCard({ book, onRadarClick }) {
+function BookCard({ book, onRadarClick, RadarBooks, ReadBooks }) {
   const [mouseHover, setMouseHover] = useState(false);
+ 
+  const cardColor = ReadBooks.has(book) ?  "green": (RadarBooks.has(book) ? 'blue': 'yellow');
   const baseStyle = {
     width: "100%",
     textAlign: "center",
-    backgroundColor: "rgb(255,255,78)",
+    backgroundColor: cardColor,
     opacity: "1",
   };
   const hoverStyle = { ...baseStyle, opacity: "0.4" };
@@ -21,13 +23,14 @@ function BookCard({ book, onRadarClick }) {
           {book.authors[0] ? book.authors[0].name : "U.N. Owen"}
         </Card.Text>
       </Card.Body>
-      <div onClick={() => onRadarClick(book)}>
+  
+    <div onClick={() => onRadarClick(book)}>
         <Card.Footer
           style={mouseHover ? hoverStyle : baseStyle}
           onMouseEnter={() => setMouseHover(true)}
           onMouseLeave={() => setMouseHover(false)}
         >
-          Put it on your radar
+           {ReadBooks.has(book) ? 'You read this book' : (RadarBooks.has(book) ? 'Put it on your read': 'Put it on your radar')}
         </Card.Footer>
       </div>
     </Card>

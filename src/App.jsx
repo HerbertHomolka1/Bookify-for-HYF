@@ -6,29 +6,43 @@ import Flex from "./components/Flex";
 import { useBooks } from "./hooks";
 
 function App() {
-  // const [read, setRead] = useState(new Set([]));
+  const [ReadBooks, setReadBooks] = useState(new Set([]));
   const [RadarBooks, setRadarBooks] = useState(new Set([]));
-  const [navigation, setNavigation] = useState("discover");
+  const [mynavigation, setMynavigation] = useState("discover");
   const [page, setPage] = useState(1);
 
   let data = useBooks(page);
-
+  
   const onRadarClick = (book) => {
-    setRadarBooks(RadarBooks.add(book));
-    console.log("RadarBooks: ", RadarBooks);
+    console.log(RadarBooks)
+    const newRadarBooks = new Set(RadarBooks)
+    const newReadBooks = new Set(ReadBooks)
+    if (RadarBooks.has(book)) { 
+      newRadarBooks.delete(book);
+      newReadBooks.add(book)
+    } else if (!ReadBooks.has(book)){
+      newRadarBooks.add(book);
+    }
+
+    setRadarBooks(newRadarBooks);
+    setReadBooks(newReadBooks);
+   
+  
   };
 
-  if (navigation === "on-radar") {
-    data = RadarBooks;
+  if (mynavigation === "on-radar") {
+    data = [...RadarBooks];
+  } else if (mynavigation === "read") {
+    data = [...ReadBooks];
   }
 
   let cards;
   cards = Object.values(data).map((book) => (
-    <BookCard key={book.id} book={book} onRadarClick={onRadarClick} />
+    <BookCard key={book.id} book={book} onRadarClick={onRadarClick} RadarBooks={RadarBooks} ReadBooks = {ReadBooks} />
   ));
   return (
     <>
-      <Navigation setNavigation={setNavigation} page={page} setPage={setPage} />
+      <Navigation mynavigation={mynavigation} setMynavigation={setMynavigation} page={page} setPage={setPage} />
 
       <div style={{ margin: "150px" }}>
         <Flex gap="30px"> {cards}</Flex>

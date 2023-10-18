@@ -5,10 +5,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Dropdown from "react-bootstrap/Dropdown";
 
-function Navigation({ setNavigation, page, setPage }) {
-
-
-
+function Navigation({ mynavigation, setMynavigation, page, setPage }) {
   return (
     <Navbar
       style={{ width: "100%", margin: "0 auto", height: "100px" }}
@@ -29,27 +26,34 @@ function Navigation({ setNavigation, page, setPage }) {
           >
             <Dropdown>
               <Dropdown.Toggle variant="light" id="dropdown-basic">
-                Go to page
+             current : {mynavigation}
               </Dropdown.Toggle>
 
               <Dropdown.Menu>
-                <Dropdown.Item onClick={() => setNavigation("discover")}>
+                { mynavigation === 'discover' ? '' :  <Dropdown.Item onClick={() => setMynavigation("discover")}>
                   Discover
-                </Dropdown.Item>
-                <Dropdown.Item onClick={() => setNavigation("read")}>
-                  Read
-                </Dropdown.Item>
-                <Dropdown.Item onClick={() => setNavigation("on-radar")}>
+                </Dropdown.Item>}
+                {mynavigation === 'on-radar' ?  '' : <Dropdown.Item onClick={() => setMynavigation("on-radar")}>
                   On my radar
-                </Dropdown.Item>
+                </Dropdown.Item>}
+                { mynavigation === 'read' ? '' : <Dropdown.Item onClick={() => setMynavigation("read")}>
+                  Read
+                </Dropdown.Item>}
               </Dropdown.Menu>
             </Dropdown>
           </Nav>
 
           <ButtonGroup style={{ margin: "50px" }} aria-label="Basic example">
-            <Button variant="light" onClick={()=> page > 1 ? setPage(page-1) :  setPage(page) }>Previous Page</Button>
+            <Button
+              variant="light"
+              onClick={() => (page > 1 ? setPage(page - 1) : setPage(page))}
+            >
+              Previous Page
+            </Button>
             <p style={{ fontSize: "45px" }}> {page} </p>
-            <Button variant="light" onClick={()=> setPage(page+1)}>Next Page</Button>
+            <Button variant="light" onClick={() => setPage(page + 1)}>
+              Next Page
+            </Button>
           </ButtonGroup>
         </Navbar.Collapse>
       </Container>
