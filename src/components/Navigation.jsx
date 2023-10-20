@@ -4,8 +4,22 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Dropdown from "react-bootstrap/Dropdown";
+import DropdownButton from 'react-bootstrap/DropdownButton';
 
 function Navigation({ mynavigation, setMynavigation, page, setPage }) {
+
+    const getPageList = (page) =>{
+        let pageList = [];
+        for (let i = page-3; i<=page+3; i++){
+            if (i!=page && i>0) {
+                pageList.push(i)
+            }
+        }
+        return pageList
+    }
+  
+
+
   return (
     <Navbar
       style={{ width: "100%", margin: "0 auto", height: "100px" }}
@@ -26,19 +40,31 @@ function Navigation({ mynavigation, setMynavigation, page, setPage }) {
           >
             <Dropdown>
               <Dropdown.Toggle variant="light" id="dropdown-basic">
-             current : {mynavigation}
+                current : {mynavigation}
               </Dropdown.Toggle>
 
               <Dropdown.Menu>
-                { mynavigation === 'discover' ? '' :  <Dropdown.Item onClick={() => setMynavigation("discover")}>
-                  Discover
-                </Dropdown.Item>}
-                {mynavigation === 'on-radar' ?  '' : <Dropdown.Item onClick={() => setMynavigation("on-radar")}>
-                  On my radar
-                </Dropdown.Item>}
-                { mynavigation === 'read' ? '' : <Dropdown.Item onClick={() => setMynavigation("read")}>
-                  Read
-                </Dropdown.Item>}
+                {mynavigation === "discover" ? (
+                  ""
+                ) : (
+                  <Dropdown.Item onClick={() => setMynavigation("discover")}>
+                    Discover
+                  </Dropdown.Item>
+                )}
+                {mynavigation === "on-radar" ? (
+                  ""
+                ) : (
+                  <Dropdown.Item onClick={() => setMynavigation("on-radar")}>
+                    On my radar
+                  </Dropdown.Item>
+                )}
+                {mynavigation === "read" ? (
+                  ""
+                ) : (
+                  <Dropdown.Item onClick={() => setMynavigation("read")}>
+                    Read
+                  </Dropdown.Item>
+                )}
               </Dropdown.Menu>
             </Dropdown>
           </Nav>
@@ -50,7 +76,17 @@ function Navigation({ mynavigation, setMynavigation, page, setPage }) {
             >
               Previous Page
             </Button>
-            <p style={{ fontSize: "45px" }}> {page} </p>
+            <p style={{ fontSize: "45px" }}>
+                
+            <DropdownButton variant = 'light' title={page}>
+              
+                { getPageList(page).map((i) => (
+                    <Dropdown.Item key={i} onClick={()=>setPage(i)}>{i}</Dropdown.Item>
+                ))}
+            </DropdownButton>
+       
+
+            </p>
             <Button variant="light" onClick={() => setPage(page + 1)}>
               Next Page
             </Button>
