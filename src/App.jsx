@@ -11,7 +11,7 @@ function App() {
   const [RadarBooks, setRadarBooks] = useState(new Set([]));
   const [mynavigation, setMynavigation] = useState("discover");
   const [page, setPage] = useState(1);
-  const [bookSort, setBookSort] = useState('id')
+  const [bookSort, setBookSort] = useState("id");
   // const [alert, setAlert] = useState(0);
 
   let data = [];
@@ -50,7 +50,7 @@ function App() {
     data = [...ReadBooks];
   }
 
-  if (bookSort === 'title') {
+if (bookSort === "title") {
     data.sort((a, b) => {
       const titleA = a.title.toUpperCase(); // Convert titles to uppercase for case-insensitive sorting
       const titleB = b.title.toUpperCase();
@@ -63,7 +63,7 @@ function App() {
         return 0;
       }
     });
-  } else if (bookSort === 'id') {
+  } else if (bookSort === "id") {
     data.sort((a, b) => a.id - b.id);
   }
 
@@ -75,7 +75,7 @@ function App() {
       onReadClick={onReadClick}
       RadarBooks={RadarBooks}
       ReadBooks={ReadBooks}
-
+      mynavigation={mynavigation}
     />
   ));
   return (
@@ -85,7 +85,7 @@ function App() {
         setMynavigation={setMynavigation}
         page={page}
         setPage={setPage}
-        setBookSort ={setBookSort}
+        setBookSort={setBookSort}
       />
       {/* <Alert style={{ width: '100%', position: 'fixed', top: '100px', marginBottom:'100px', zIndex: '9999' }}>
           This is a  alert—check it out!

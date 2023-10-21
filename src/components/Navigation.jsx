@@ -80,7 +80,7 @@ function Navigation({
               >
                 Previous Page
               </Button>
-              <p style={{ fontSize: "45px" }}>
+              <div style={{ fontSize: "45px" }}>
                 <DropdownButton variant="light" title={page}>
                   {getPageList(page).map((i) => (
                     <Dropdown.Item key={i} onClick={() => setPage(i)}>
@@ -88,7 +88,7 @@ function Navigation({
                     </Dropdown.Item>
                   ))}
                 </DropdownButton>
-              </p>
+              </div>
               <Button variant="light" onClick={() => setPage(page + 1)}>
                 Next Page
               </Button>
