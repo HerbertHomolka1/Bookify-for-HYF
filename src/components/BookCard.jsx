@@ -1,16 +1,20 @@
 import Card from "react-bootstrap/Card";
-import ListGroup from "react-bootstrap/ListGroup";
-import Form from "react-bootstrap/Form";
+
 import { useEffect, useState } from "react";
 import Flex from "./Flex";
 
-
-
-function BookCard({ book, onRadarClick, onReadClick, RadarBooks, ReadBooks, mynavigation }) {
+function BookCard({
+  book,
+  onRadarClick,
+  onReadClick,
+  RadarBooks,
+  ReadBooks,
+  mynavigation,
+}) {
   const [mouse1Hover, setMouse1Hover] = useState(false);
   const [mouse2Hover, setMouse2Hover] = useState(false);
-  const [ratingHover, setRatingHover] = useState(0)
-  const [rating, setRating] = useState(book.rating ? book.rating : 0); 
+  const [ratingHover, setRatingHover] = useState(0);
+  const [rating, setRating] = useState(book.rating ? book.rating : 0);
 
   const cardColor = ReadBooks.has(book)
     ? "green"
@@ -23,7 +27,7 @@ function BookCard({ book, onRadarClick, onReadClick, RadarBooks, ReadBooks, myna
     backgroundColor: cardColor,
     opacity: "1",
   };
-  const hoverStyle = { ...baseStyle, opacity: "0.4" };
+  const hoverStyle = { ...baseStyle, opacity: "0.7" };
   return (
     <Card style={{ width: "18rem" }}>
       <Card.Img variant="top" src={book.formats["image/jpeg"]} />
@@ -49,22 +53,37 @@ function BookCard({ book, onRadarClick, onReadClick, RadarBooks, ReadBooks, myna
           </Card.Footer>
         </div>
       )}
-      {ReadBooks.has(book) 
-      ?  (<Flex flexDirection="row"> {[1,2,3,4,5].map((index)=> 
-
-      <div                  onMouseEnter={() => {setRatingHover(index); console.log(ratingHover)}}
-                            onMouseLeave={() => {setRatingHover(0); console.log(ratingHover)}}  
-                            onClick={()=> {setRating(index); book.rating = index;}}
-                            key={index} 
-                            style={{  width:'20%', 
-                                                  backgroundColor: (index>rating ? 'blue':'green'), 
-                                                  opacity: (ratingHover === index ? 0.4 : 1) ,  
-                                                }}>{index}</div>
-
-      )}</Flex>)
-      : ''
-      }
-
+      {ReadBooks.has(book) ? (
+        <Flex flexDirection="row">
+          {" "}
+          {[1, 2, 3, 4, 5].map((index) => (
+            <div
+              onMouseEnter={() => {
+                setRatingHover(index);
+                console.log(ratingHover);
+              }}
+              onMouseLeave={() => {
+                setRatingHover(0);
+                console.log(ratingHover);
+              }}
+              onClick={() => {
+                setRating(index);
+                book.rating = index;
+              }}
+              key={index}
+              style={{
+                width: "20%",
+                backgroundColor: index > rating ? "blue" : "green",
+                opacity: ratingHover === index ? 0.7 : 1,
+              }}
+            >
+              {index}
+            </div>
+          ))}
+        </Flex>
+      ) : (
+        ""
+      )}
 
       {RadarBooks.has(book) || ReadBooks.has(book) ? (
         <div onClick={() => onReadClick(book)}>

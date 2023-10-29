@@ -50,7 +50,7 @@ function App() {
     data = [...ReadBooks];
   }
 
-if (bookSort === "title") {
+  if (bookSort === "title") {
     data.sort((a, b) => {
       const titleA = a.title.toUpperCase(); // Convert titles to uppercase for case-insensitive sorting
       const titleB = b.title.toUpperCase();
