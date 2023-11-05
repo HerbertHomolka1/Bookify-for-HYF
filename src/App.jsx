@@ -9,7 +9,7 @@ import Alert from "react-bootstrap/Alert";
 function App() {
   const [ReadBooks, setReadBooks] = useState(new Set([]));
   const [RadarBooks, setRadarBooks] = useState(new Set([]));
-  const [mynavigation, setMynavigation] = useState("discover"); 
+  const [mynavigation, setMynavigation] = useState("discover");
   const [page, setPage] = useState(1);
   const [bookSort, setBookSort] = useState("id");
   // const [alert, setAlert] = useState(0);
@@ -18,9 +18,6 @@ function App() {
   for (let book of useBooks(page)) {
     if (!ReadBooks.has(book) && !RadarBooks.has(book)) data.push(book);
   }
-
-
-  // let data = useBooks()
 
   const onRadarClick = (book) => {
     const newRadarBooks = new Set(RadarBooks);
@@ -48,7 +45,7 @@ function App() {
   };
 
   if (mynavigation === "on-radar") {
-    data = [...RadarBooks];   //    
+    data = [...RadarBooks];
   } else if (mynavigation === "read") {
     data = [...ReadBooks];
   }
