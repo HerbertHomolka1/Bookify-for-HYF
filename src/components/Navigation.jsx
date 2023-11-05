@@ -96,7 +96,7 @@ function Navigation({
           ) : (
             ""
           )}
-          {mynavigation === "on-radar" || mynavigation === "read"? (
+          {mynavigation === "on-radar" || mynavigation === "read" ? (
             <DropdownButton
               style={{ margin: "50px" }}
               variant="light"
