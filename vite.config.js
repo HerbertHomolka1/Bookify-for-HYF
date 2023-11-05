@@ -6,6 +6,6 @@ export default defineConfig({
   plugins: [react()],
   base: "/bookify-for-hyf",
   build: {
-     chunkSizeWarningLimit: 1600,
-   }
+    chunkSizeWarningLimit: 1600,
+  }
 })
